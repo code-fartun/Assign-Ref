@@ -1,0 +1,65 @@
+-- Description:Update into dbo.Podcast
+--			    
+--Params:	dbo.Podcast_Update
+--				@Title nvarchar(50)
+--			   ,@Description nvarchar(50)
+--			   ,@Url nvarchar(50)
+--			   ,@PodcastTypeId int
+--			   ,@CoverImageUrl nvarchar(200)
+--			   ,@CreatedBy int
+--			   ,@ModifiedBy int
+--			   ,@Id int OUTPUT	
+
+--==============================================================
+
+CREATE proc [dbo].[Podcast_Update]
+				@Title nvarchar(50)
+			   ,@Description nvarchar(50)
+			   ,@Url nvarchar(50)
+			   ,@PodcastTypeId int
+			   ,@CoverImageUrl nvarchar(200)
+			   ,@ModifiedBy int
+			   ,@Id int OUTPUT	
+
+as
+
+/*
+		Declare @Id int = 7
+
+	Declare		@Title nvarchar(50) = 'Football World Eps 1'
+			   ,@Description nvarchar(50) = 'A talk show that covers all things Football'
+			   ,@Url nvarchar(50) = 'www.testurl1.com'
+			   ,@PodcastTypeId int = 6
+			   ,@CoverImageUrl nvarchar(200) = 'https://tinyurl.com/3crdpeyk'
+			   ,@ModifiedBy int = 6
+
+	Execute dbo.Podcast_Update
+				@Title
+			   ,@Description 
+			   ,@Url 
+			   ,@PodcastTypeId 
+			   ,@CoverImageUrl
+			   ,@ModifiedBy 
+			   ,@Id 
+*/
+
+BEGIN
+
+	Declare @DateNow datetime2 = getutcdate()
+
+
+		UPDATE [dbo].[Podcast]
+		   SET [Title] = @Title
+			  ,[Description] = @Description 
+			  ,[Url] = @Url 
+			  ,[PodcastTypeId] = @PodcastTypeId 
+			  ,[CoverImageUrl] = @CoverImageUrl
+			  ,[DateModified] = @DateNow
+			  ,[ModifiedBy] = @ModifiedBy
+		 WHERE Id = @Id
+
+
+END
+
+
+GO
