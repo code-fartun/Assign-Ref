@@ -1,0 +1,71 @@
+-- Description:Insert into dbo.Podcast
+--			    
+--Params:	dbo.Podcast_Insert
+--				@Title nvarchar(50)
+--			   ,@Description nvarchar(50)
+--			   ,@Url nvarchar(50)
+--			   ,@PodcastTypeId int
+--			   ,@CoverImageUrl nvarchar(200)
+--			   ,@CreatedBy int
+--			   ,@ModifiedBy int
+--			   ,@Id int OUTPUT	
+
+--==============================================================
+
+CREATE proc [dbo].[Podcast_Insert]
+				@Title nvarchar(50)
+			   ,@Description nvarchar(50)
+			   ,@Url nvarchar(50)
+			   ,@PodcastTypeId int
+			   ,@CoverImageUrl nvarchar(200)
+			   ,@CreatedBy int
+			   ,@ModifiedBy int
+			   ,@Id int OUTPUT	
+
+As
+
+/*
+	Declare @Id int = 0
+
+	Declare		@Title nvarchar(50) = 'Football World Eps 1'
+			   ,@Description nvarchar(50) = 'A talk show that covers all things Football'
+			   ,@Url nvarchar(50) = 'www.testurl.com'
+			   ,@PodcastTypeId int = 6
+			   ,@CoverImageUrl nvarchar(200) = 'https://tinyurl.com/3crdpeyk'
+			   ,@CreatedBy int = 6
+			   ,@ModifiedBy int = 6
+
+    Execute dbo.Podcast_Insert
+				@Title
+			   ,@Description 
+			   ,@Url 
+			   ,@PodcastTypeId 
+			   ,@CoverImageUrl
+			   ,@CreatedBy 
+			   ,@ModifiedBy 
+			   ,@Id OUTPUT	
+
+*/
+
+BEGIN
+
+	INSERT INTO [dbo].[Podcast]
+			   ([Title]
+			   ,[Description]
+			   ,[Url]
+			   ,[PodcastTypeId]
+			   ,[CoverImageUrl]
+			   ,[CreatedBy]
+			   ,[ModifiedBy])
+     VALUES
+			   (@Title
+			   ,@Description 
+			   ,@Url 
+			   ,@PodcastTypeId 
+			   ,@CoverImageUrl
+			   ,@CreatedBy
+			   ,@ModifiedBy)
+	SET @Id = SCOPE_IDENTITY();
+
+END
+GO
