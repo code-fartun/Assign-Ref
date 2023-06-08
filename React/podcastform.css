@@ -1,0 +1,9 @@
+
+.form-card-container{
+    margin-bottom:80px
+}
+
+.podcast-form .podcast-button{
+    display: flex;
+    justify-content: flex-end;
+}
