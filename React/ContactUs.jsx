@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import contactUsSchema from "schemas/contactUsSchema";
-import debug from "sabio-debug";
 import contactService from "services/contactUsService";
 import toastr from "toastr";
-
-const _logger = debug.extend("ContactUs");
 
 function ContactUs() {
   const initialFormData = {
@@ -16,14 +13,12 @@ function ContactUs() {
   const [formData, setFormData] = useState(initialFormData);
 
   function handleSubmit(values) {
-    _logger(values);
     contactService
       .contactUs(values)
       .then(onContactUsSuccess)
       .catch(onContactUsError);
   }
   function onContactUsSuccess(response, { resetForm }) {
-    _logger("onContactUsSuccess", response);
     toastr.success(
       "Message sent successfully",
       "Thank you for reaching out to our team."
@@ -32,7 +27,6 @@ function ContactUs() {
     setFormData(initialFormData);
   }
   function onContactUsError(error) {
-    _logger("onContactUsError", error);
     toastr.error(
       "Could not send your message please try again",
       "Error on submission"
