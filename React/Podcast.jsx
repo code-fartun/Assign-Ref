@@ -6,10 +6,9 @@ import "react-h5-audio-player/lib/styles.css";
 import { AiFillPlayCircle } from "react-icons/ai";
 import podcastService from "../../services/podcastService";
 import toastr from "toastr";
-import debug from "sabio-debug";
 import "./podcast.css";
 
-const _logger = debug.extend("Podcast");
+
 const Podcast = () => {
   const [podcastData, setPodcastsData] = useState({
     podcastsArray: [
@@ -30,7 +29,6 @@ const Podcast = () => {
   }, []);
 
   function onPodcastSuccess(response) {
-    _logger("onPodcastSuccess", response);
     setPodcastsData((prevState) => {
       const newList = { ...prevState };
       newList.podcastsArray = response.items;
@@ -40,7 +38,6 @@ const Podcast = () => {
     toastr.success("Audio Playing");
   }
   function onPodcastError(response) {
-    _logger("onPodcastError", response);
     toastr.error("Audio Not Playing");
   }
   const mapPodcasts = (aPodcast) => {
