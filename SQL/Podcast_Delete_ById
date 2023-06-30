@@ -1,34 +1,21 @@
---==============================================================
--- Description:Delete Record from dbo.Podcast
---						By the Id
---			    
---Params:	dbo.Podcast_DeleteById
---				ID (int)
-
---==============================================================
-CREATE proc [dbo].[Podcast_Delete_ById]
-					@Id int OUTPUT
+Alter proc [dbo].[Podcast_Delete_ById]
+		@Id int OUTPUT
 AS
 /*
 
-	Declare @Id int = 16
-
-	Execute dbo.Podcast_Delete_ById
-				@Id
+	Declare 
+	@Id int = 16
+	Execute dbo.Podcast_Delete_ById @Id
 
 */
 BEGIN
- Declare @DateNow datetime2 = getutcdate()
-			
-			
-			DELETE from [dbo].[Podcast]
-			WHERE @Id = Id
+	 Declare @DateNow datetime2 = getutcdate()
+	 DELETE from [dbo].[Podcast]
+	 WHERE @Id = Id
 
-			UPDATE dbo.Podcast
-			SET [DateModified] = @DateNow
-			WHERE Id = @Id
+	 UPDATE dbo.Podcast
+	 SET [DateModified] = @DateNow
+	 WHERE Id = @Id
 
 END
 
-
-GO
