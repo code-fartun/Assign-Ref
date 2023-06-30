@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import podcastFormSchema from "schemas/podcastFormSchema";
-import debug from "sabio-debug";
 import podcastService from "../../services/podcastService";
 import toastr from "toastr";
 import "./podcastform.css";
 
-const _logger = debug.extend("PodcastForm");
 
 function PodcastForm() {
   const [podcastFormData, setPodcastFormData] = useState({
@@ -18,14 +16,11 @@ function PodcastForm() {
     createdBy: "",
     modifiedBy: "",
   });
-  _logger(podcastFormData);
   const { state } = useLocation;
 
   useEffect(() => {
-    _logger(state);
     if (state && state.type === "PodcastForm_Edit") {
       const stateChange = state.payload;
-      _logger("PodcastForm useEffect", stateChange);
       setPodcastFormData((prevState) => {
         let newForm = { ...prevState, ...stateChange };
         newForm.podcastId = stateChange.podcast.id;
@@ -38,7 +33,6 @@ function PodcastForm() {
   }, []);
 
   useEffect(() => {
-    _logger(state);
     if (state && state.type === "PodcastForm_Add") {
       const stateObj = state.payload;
       setPodcastFormData((prevState) => {
@@ -48,7 +42,6 @@ function PodcastForm() {
     }
   });
   function handleSubmit(values) {
-    _logger("values in handleSubmit in PodcastForm", values);
     if (state && state.type === "PodcastForm_Edit") {
       podcastService
         .updatePodcasts(podcastFormData)
@@ -63,12 +56,10 @@ function PodcastForm() {
   }
 
   function onEditSuccess(response) {
-    _logger(response);
     toastr.success("Succes On Editting Podcast Form");
   }
 
   function onEditError(response) {
-    _logger(response);
     toastr.error(
       "Could not edit your form, please try again",
       "Error on submission"
@@ -76,11 +67,9 @@ function PodcastForm() {
   }
 
   function onAddSuccess(response) {
-    _logger("onAddSuccess", response);
     toastr.success("Success On Adding Podcast Form");
   }
   function onAddError(error) {
-    _logger(error);
     toastr.error(
       "Could not add your form, please try again",
       "Error on submission"
